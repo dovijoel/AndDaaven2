@@ -38,7 +38,7 @@ fun  AndDaavenApp (
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute =
             navBackStackEntry?.destination?.route ?: AndDaavenDestinations.HOME_ROUTE
-        val currentTefilla  = navBackStackEntry?.arguments?.get("tefillaType") as TefillaType?
+        val currentTefilla  = if (navBackStackEntry?.arguments?.containsKey("tefillaType") == true)  navBackStackEntry?.arguments?.get("tefillaType") as TefillaType? else null
         val isExpandedScreen = true
         val sizeAwareDrawerState = rememberSizeAwareDrawerState(isExpandedScreen)
 

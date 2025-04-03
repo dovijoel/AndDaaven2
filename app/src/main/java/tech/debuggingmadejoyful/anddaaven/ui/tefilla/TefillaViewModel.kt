@@ -39,7 +39,7 @@ class TefillaViewModel(
     private fun getTefilla(type: TefillaType) {
         _uiState.update { it.copy(loading = true) }
         viewModelScope.launch {
-            val tefilla = tefillaRepository.getTefilla(type)
+            val tefilla =  tefillaRepository.getTefilla(type)
             _uiState.update {
                 when (tefilla) {
                     is Result.Success -> it.copy(tefilla = tefilla.data, loading = false)
