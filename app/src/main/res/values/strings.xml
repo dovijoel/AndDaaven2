@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">AndDaaven</string>
+    <string name="home_title">Home</string>
+    <string-array name="TefillaNameEnglish">
+        <item>Shacharit</item>
+        <item>Mincha</item>
+        <item>Maariv</item>
+        <item>B\'rachot</item>
+    </string-array>
+    <string-array name="TefillaNameHebrew">
+        <item>שחרית</item>
+        <item>מנחה</item>
+        <item>מעריב</item>
+        <item>ברכות</item>
+    </string-array>
+    <string-array name="TefillaNameEnum">
+        <item>SHACHARIT</item>
+        <item>MINCHA</item>
+        <item>MAARIV</item>
+        <item>BERACHOT</item>
+    </string-array>
+    <string name="mincha_fast_day_english">Mincha (fast days)</string>
+    <string name="mincha_fast_day_hebrew">מנחה לתענית ציבור</string>
+    <string name="kiddush_levana_english">Kiddush Levana</string>
+    <string name="kiddush_levana_hebrew">קידוש לבנה</string>
+    <string name="chanuka_english">Chanuka</string>
+    <string name="chanuka_hebrew">חנוכה</string>
+    <string name="esther_english">Esther</string>
+    <string name="esther_hebrew">אסתר</string>
+</resources>
