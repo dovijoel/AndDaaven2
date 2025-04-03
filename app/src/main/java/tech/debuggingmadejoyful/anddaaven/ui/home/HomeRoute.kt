@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,11 +42,12 @@ import tech.debuggingmadejoyful.anddaaven.ui.components.TefillaButtons
 @Composable
 fun HomeRoute(
     homeViewModel: HomeViewModel,
+    openDrawer: () -> Unit,
 ) {
     val topAppBarState = rememberTopAppBarState()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { HomeTopAppBar(topAppBarState = topAppBarState) }
+        topBar = { HomeTopAppBar(topAppBarState = topAppBarState, openDrawer = openDrawer) }
     ) { innerPadding ->
         TefillaButtons(
             onTefillaSelected = { homeViewModel.navigateToTefilla(it) },
@@ -60,7 +62,8 @@ fun HomeTopAppBar(
     modifier: Modifier = Modifier,
     topAppBarState: TopAppBarState = rememberTopAppBarState(),
     scrollBehavior: TopAppBarScrollBehavior? =
-        TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState)
+        TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState),
+    openDrawer: () -> Unit,
 ) {
     val title = stringResource(id = R.string.app_name)
     CenterAlignedTopAppBar(
@@ -74,10 +77,18 @@ fun HomeTopAppBar(
         },
         scrollBehavior = scrollBehavior,
         modifier = modifier,
+        navigationIcon = {
+            IconButton(onClick = openDrawer) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_launcher_anddaaven),
+                    contentDescription = stringResource(R.string.cd_open_navigation_drawer)
+                )
+            }
+        },
         actions = {
             IconButton(onClick = { /* do something */ }) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
+                    imageVector = Icons.Filled.MoreVert,
                     contentDescription = "Settings menu"
                 )
             }

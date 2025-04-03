@@ -44,7 +44,8 @@ fun AndDaavenNavGraph(
                     tefillaType = tefillaUri.tefillaType)
                 )
             TefillaRoute(
-                tefillaViewModel
+                tefillaViewModel,
+                openDrawer
             )
         }
         composable(AndDaavenDestinations.HOME_ROUTE) {
@@ -52,7 +53,8 @@ fun AndDaavenNavGraph(
                 factory = HomeViewModel.provideFactory(navController)
             )
             HomeRoute(
-                homeViewModel
+                homeViewModel,
+                openDrawer
             )
         }
     }

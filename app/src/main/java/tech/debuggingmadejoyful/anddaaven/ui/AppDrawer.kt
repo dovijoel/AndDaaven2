@@ -31,6 +31,7 @@ import androidx.core.net.toUri
 import androidx.compose.ui.platform.LocalContext
 import androidx.glance.action.Action
 import androidx.glance.appwidget.action.actionStartActivity
+import androidx.navigation.NavArgument
 import tech.debuggingmadejoyful.anddaaven.AndDaavenDestinations
 import tech.debuggingmadejoyful.anddaaven.R
 import tech.debuggingmadejoyful.anddaaven.R.array.TefillaNameEnum
@@ -43,7 +44,9 @@ import tech.debuggingmadejoyful.anddaaven.data.TefillaType
 fun AppDrawer(
     drawerState: DrawerState,
     currentRoute: String,
+    currentTefilla: TefillaType? = null,
     navigateToHome: () -> Unit,
+    navigateToTefilla: (TefillaType) -> Unit,
     closeDrawer: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -73,25 +76,13 @@ fun AppDrawer(
                     Spacer(Modifier.weight(4f))
                     Text(tefillaNamesHebrew[index], style = TextStyle(textDirection = TextDirection.Rtl))
                 } },
-                selected = currentRoute == "${AndDaavenDestinations.TEFILLA_ROUTE}?$TEFILLA_ID=${tefillaType.name}",
-                onClick = { openTefilla(context, tefillaType); closeDrawer() },
+                selected = currentRoute == "tech.debuggingmadejoyful.anddaaven.TefillaUri/{tefillaType}" && currentTefilla != null && currentTefilla == tefillaType,
+                onClick = { navigateToTefilla(tefillaType); closeDrawer() },
                 modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
             )
         }
 
     }
-}
-
-private fun openTefilla(context: Context, tefillaType: TefillaType): Action {
-    // actionStartActivity is the preferred way to start activities.
-    return actionStartActivity(
-        Intent(
-            Intent.ACTION_VIEW,
-            "$ANDDAAVEN_APP_URI/tefilla?postId=${tefillaType.name}".toUri(),
-            context,
-            MainActivity::class.java
-        )
-    )
 }
 
 @Composable
@@ -100,7 +91,6 @@ private fun AndDaavenLogo(modifier: Modifier = Modifier) {
         Icon(
             painterResource(R.drawable.ic_launcher_anddaaven),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary
         )
         Spacer(Modifier.width(8.dp))
         Text(stringResource(R.string.app_name))
@@ -116,6 +106,7 @@ fun PreviewAppDrawer() {
             drawerState = rememberDrawerState(initialValue = DrawerValue.Open),
             currentRoute = AndDaavenDestinations.HOME_ROUTE,
             navigateToHome = {},
+            navigateToTefilla = {},
             closeDrawer = { }
         )
     }

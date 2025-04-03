@@ -6,15 +6,17 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun TefillaRoute(
-    viewModel: TefillaViewModel
+    viewModel: TefillaViewModel,
+    openDrawer: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    TefillaRoute(uiState)
+    TefillaRoute(uiState, openDrawer)
 }
 
 @Composable
 fun TefillaRoute(
-    uiState: TefillaUiState
+    uiState: TefillaUiState,
+    openDrawer: () -> Unit,
 ) {
-    TefillaScreen(uiState)
+    TefillaScreen(uiState, openDrawer)
 }

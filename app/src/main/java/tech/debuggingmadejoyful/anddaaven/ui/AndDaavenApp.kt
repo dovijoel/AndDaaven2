@@ -18,6 +18,7 @@ import tech.debuggingmadejoyful.anddaaven.AndDaavenDestinations
 import tech.debuggingmadejoyful.anddaaven.AndDaavenNavGraph
 import tech.debuggingmadejoyful.anddaaven.AndDaavenNavigationActions
 import tech.debuggingmadejoyful.anddaaven.data.TefillaRepository
+import tech.debuggingmadejoyful.anddaaven.data.TefillaType
 import tech.debuggingmadejoyful.anddaaven.ui.theme.AndDaavenTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,7 +38,7 @@ fun  AndDaavenApp (
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute =
             navBackStackEntry?.destination?.route ?: AndDaavenDestinations.HOME_ROUTE
-
+        val currentTefilla  = navBackStackEntry?.arguments?.get("tefillaType") as TefillaType?
         val isExpandedScreen = true
         val sizeAwareDrawerState = rememberSizeAwareDrawerState(isExpandedScreen)
 
@@ -46,7 +47,9 @@ fun  AndDaavenApp (
                 AppDrawer(
                     drawerState = sizeAwareDrawerState,
                     currentRoute = currentRoute,
+                    currentTefilla = currentTefilla,
                     navigateToHome = navigationActions.navigateToHome,
+                    navigateToTefilla = navigationActions.navigateToTefilla,
                     closeDrawer = { coroutineScope.launch { sizeAwareDrawerState.close() } }
                 )
             },
@@ -78,7 +81,7 @@ fun  AndDaavenApp (
  */
 @Composable
 private fun rememberSizeAwareDrawerState(isExpandedScreen: Boolean): DrawerState {
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val drawerState = rememberDrawerState(DrawerValue.Open)
 
     return if (!isExpandedScreen) {
         // If we want to allow showing the drawer, we use a real, remembered drawer

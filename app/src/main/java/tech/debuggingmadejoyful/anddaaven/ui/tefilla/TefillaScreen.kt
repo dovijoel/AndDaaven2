@@ -2,6 +2,7 @@ package tech.debuggingmadejoyful.anddaaven.ui.tefilla
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -15,6 +16,7 @@ import androidx.compose.material3.TopAppBarState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import tech.debuggingmadejoyful.anddaaven.R
 import tech.debuggingmadejoyful.anddaaven.ui.home.HomeUiState
@@ -22,13 +24,14 @@ import tech.debuggingmadejoyful.anddaaven.ui.home.HomeUiState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TefillaScreen(
-    uiState: TefillaUiState
+    uiState: TefillaUiState,
+    openDrawer: () -> Unit,
 ) {
     val topAppBarState = rememberTopAppBarState()
     Scaffold(
     topBar = {
         if (uiState.tefilla != null && uiState.tefilla.tefillaName.isNotEmpty())
-        TefillaTopAppBar(uiState.tefilla.tefillaName, topAppBarState = topAppBarState) }
+        TefillaTopAppBar(uiState.tefilla.tefillaName, topAppBarState = topAppBarState, openDrawer = openDrawer) }
     ) { innerPadding ->
 
         if (uiState.tefilla != null)
@@ -47,7 +50,8 @@ fun TefillaTopAppBar(
     modifier: Modifier = Modifier,
     topAppBarState: TopAppBarState = rememberTopAppBarState(),
     scrollBehavior: TopAppBarScrollBehavior? =
-        TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState)
+        TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState),
+    openDrawer: () -> Unit,
 ) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -60,10 +64,18 @@ fun TefillaTopAppBar(
         },
         scrollBehavior = scrollBehavior,
         modifier = modifier,
+        navigationIcon = {
+            IconButton(onClick = openDrawer) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_launcher_anddaaven),
+                    contentDescription = stringResource(R.string.cd_open_navigation_drawer)
+                )
+            }
+        },
         actions = {
             IconButton(onClick = { /* do something */ }) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
+                    imageVector = Icons.Filled.MoreVert,
                     contentDescription = "Settings menu"
                 )
             }
