@@ -10,9 +10,10 @@ import androidx.compose.ui.Modifier
 import tech.debuggingmadejoyful.anddaaven.data.Tefilla
 
 @Composable
-fun TefillaComponent(tefilla: Tefilla) {
+fun TefillaComponent(tefilla: Tefilla, innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
+            .padding(innerPadding)
             .verticalScroll(rememberScrollState())
     ) {
         tefilla.sections.forEach { section ->
