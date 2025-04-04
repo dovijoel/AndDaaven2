@@ -9,17 +9,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.glance.action.Action
 import androidx.glance.appwidget.action.actionStartActivity
 import androidx.navigation.compose.rememberNavController
 import tech.debuggingmadejoyful.anddaaven.AndDaavenApplication.Companion.ANDDAAVEN_APP_URI
-import tech.debuggingmadejoyful.anddaaven.AndDaavenNavigationActions
-import tech.debuggingmadejoyful.anddaaven.data.TefillaType
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 import tech.debuggingmadejoyful.anddaaven.ui.MainActivity
 
 @Composable

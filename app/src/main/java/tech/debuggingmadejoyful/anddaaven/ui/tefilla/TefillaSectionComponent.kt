@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,10 +12,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
-import tech.debuggingmadejoyful.anddaaven.data.TefillaSection
+import androidx.compose.ui.unit.sp
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaSection
 
 @Composable
-fun TefillaSectionComponent(section: TefillaSection) {
+fun TefillaSectionComponent(section: TefillaSection, fontSize: Float) {
     Column {
         Row {
             Spacer(Modifier.weight(1f))
@@ -25,13 +25,14 @@ fun TefillaSectionComponent(section: TefillaSection) {
                 textDecoration = TextDecoration.Underline,
                 style = TextStyle(
                     textAlign = TextAlign.Justify,
-                    textDirection = TextDirection.Rtl
+                    textDirection = TextDirection.Rtl,
+                    fontSize = fontSize.sp
                 ),
                 modifier = Modifier.padding(8.dp)
             )
         }
     }
     section.paragraphs.forEach {
-        TefillaParagraphComponent(it.text)
+        TefillaParagraphComponent(it.text, fontSize)
     }
 }

@@ -1,7 +1,5 @@
 package tech.debuggingmadejoyful.anddaaven.ui
 
-import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +10,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
@@ -27,28 +24,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.compose.ui.platform.LocalContext
-import androidx.glance.action.Action
-import androidx.glance.appwidget.action.actionStartActivity
-import androidx.navigation.NavArgument
 import tech.debuggingmadejoyful.anddaaven.AndDaavenDestinations
 import tech.debuggingmadejoyful.anddaaven.R
 import tech.debuggingmadejoyful.anddaaven.R.array.TefillaNameEnum
-import tech.debuggingmadejoyful.anddaaven.TEFILLA_ID
 import tech.debuggingmadejoyful.anddaaven.ui.theme.AndDaavenTheme
-import tech.debuggingmadejoyful.anddaaven.AndDaavenApplication.Companion.ANDDAAVEN_APP_URI
-import tech.debuggingmadejoyful.anddaaven.data.TefillaType
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 
 @Composable
 fun AppDrawer(
     drawerState: DrawerState,
     currentRoute: String,
+    modifier: Modifier = Modifier,
     currentTefilla: TefillaType? = null,
     navigateToHome: () -> Unit,
     navigateToTefilla: (TefillaType) -> Unit,
     closeDrawer: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     ModalDrawerSheet(
         drawerState = drawerState,

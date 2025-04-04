@@ -4,19 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import tech.debuggingmadejoyful.anddaaven.data.Tefilla
-import tech.debuggingmadejoyful.anddaaven.data.TefillaRepository
-import tech.debuggingmadejoyful.anddaaven.data.TefillaType
-import tech.debuggingmadejoyful.anddaaven.data.Result
-import java.util.UUID
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.Tefilla
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaRepository
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.Result
 
 data class TefillaUiState(
     val tefilla: Tefilla? = null,

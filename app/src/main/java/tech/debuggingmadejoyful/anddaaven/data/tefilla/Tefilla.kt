@@ -1,4 +1,4 @@
-package tech.debuggingmadejoyful.anddaaven.data
+package tech.debuggingmadejoyful.anddaaven.data.tefilla
 
 data class Tefilla(
     val tefillaName: String,

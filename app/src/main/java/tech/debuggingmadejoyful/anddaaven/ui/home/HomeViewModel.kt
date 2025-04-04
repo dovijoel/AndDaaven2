@@ -1,22 +1,16 @@
 package tech.debuggingmadejoyful.anddaaven.ui.home
 
-import android.net.Uri
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import androidx.navigation.NavDeepLinkRequest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import tech.debuggingmadejoyful.anddaaven.AndDaavenApplication.Companion.ANDDAAVEN_APP_URI
 import tech.debuggingmadejoyful.anddaaven.TefillaUri
-import tech.debuggingmadejoyful.anddaaven.data.TefillaType
-import java.util.UUID
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 
 /**
  * UI state for the Home route.

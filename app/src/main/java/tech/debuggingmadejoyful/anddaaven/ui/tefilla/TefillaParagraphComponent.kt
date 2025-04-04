@@ -13,9 +13,10 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun TefillaParagraphComponent(text: String) {
+fun TefillaParagraphComponent(text: String, fontSize: Float) {
     val annotatedString = buildAnnotatedString {
         append(text)
 
@@ -26,7 +27,8 @@ fun TefillaParagraphComponent(text: String) {
             text = annotatedString,
             style = TextStyle(
                 textAlign = TextAlign.Justify,
-                textDirection = TextDirection.Rtl
+                textDirection = TextDirection.Rtl,
+                fontSize = fontSize.sp
             ),
             modifier = Modifier.padding(PaddingValues(bottom = 2.dp))
         )

@@ -1,6 +1,4 @@
-package tech.debuggingmadejoyful.anddaaven.data
-
-import kotlinx.coroutines.flow.Flow
+package tech.debuggingmadejoyful.anddaaven.data.tefilla
 
 interface TefillaRepository {
     fun getTefilla(type: TefillaType): Result<Tefilla>

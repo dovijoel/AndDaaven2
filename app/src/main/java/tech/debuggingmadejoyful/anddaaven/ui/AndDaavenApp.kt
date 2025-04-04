@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 import tech.debuggingmadejoyful.anddaaven.AndDaavenDestinations
 import tech.debuggingmadejoyful.anddaaven.AndDaavenNavGraph
 import tech.debuggingmadejoyful.anddaaven.AndDaavenNavigationActions
-import tech.debuggingmadejoyful.anddaaven.data.TefillaRepository
-import tech.debuggingmadejoyful.anddaaven.data.TefillaType
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaRepository
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 import tech.debuggingmadejoyful.anddaaven.ui.theme.AndDaavenTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,18 +53,9 @@ fun  AndDaavenApp (
                     closeDrawer = { coroutineScope.launch { sizeAwareDrawerState.close() } }
                 )
             },
-            drawerState = sizeAwareDrawerState,
-            // Only enable opening the drawer via gestures if the screen is not expanded
-            gesturesEnabled = !isExpandedScreen
+            drawerState = sizeAwareDrawerState
         ) {
             Row {
-//                if (isExpandedScreen) {
-//                    AppNavRail(
-//                        currentRoute = currentRoute,
-//                        navigateToHome = navigationActions.navigateToHome,
-//                        navigateToInterests = navigationActions.navigateToInterests,
-//                    )
-//                }
                 AndDaavenNavGraph(
                     tefillaRepository = tefillaRepository,
                     isExpandedScreen = isExpandedScreen,

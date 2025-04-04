@@ -1,14 +1,13 @@
 package tech.debuggingmadejoyful.anddaaven.ui.tefilla
 
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
@@ -20,7 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -30,20 +28,20 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import tech.debuggingmadejoyful.anddaaven.AndDaavenDestinations
 import tech.debuggingmadejoyful.anddaaven.R
-import tech.debuggingmadejoyful.anddaaven.data.TefillaType
-import tech.debuggingmadejoyful.anddaaven.ui.home.HomeUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +52,10 @@ fun TefillaScreen(
     val topAppBarState = rememberTopAppBarState()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
-
+    var scale by remember { mutableFloatStateOf(18f) }
+    val state = rememberTransformableState { zoomChange, _, _ ->
+        scale *= zoomChange
+    }
     Scaffold(
         topBar = {
             if (uiState.tefilla != null && uiState.tefilla.tefillaName.isNotEmpty())
@@ -64,7 +65,8 @@ fun TefillaScreen(
                     openDrawer = openDrawer,
                     openSectionsDrawer = { coroutineScope.launch { drawerState.open() } },
                 )
-        }
+        },
+        modifier = Modifier.transformable(state)
     ) { innerPadding ->
         val listState = rememberLazyListState()
         if (uiState.tefilla != null)
@@ -86,7 +88,8 @@ fun TefillaScreen(
                         val tefilla = remember { uiState.tefilla }
                         TefillaComponent(
                             tefilla = tefilla,
-                            listState
+                            listState,
+                            scale
                         )
                     }
                 }

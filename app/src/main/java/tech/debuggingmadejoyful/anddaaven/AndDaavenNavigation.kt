@@ -1,8 +1,7 @@
 package tech.debuggingmadejoyful.anddaaven
 
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import tech.debuggingmadejoyful.anddaaven.data.TefillaType
+import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 
 object AndDaavenDestinations {
     const val HOME_ROUTE = "home"
