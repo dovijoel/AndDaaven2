@@ -8,15 +8,20 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import tech.debuggingmadejoyful.anddaaven.AndDaavenDestinations
 import tech.debuggingmadejoyful.anddaaven.AndDaavenNavGraph
 import tech.debuggingmadejoyful.anddaaven.AndDaavenNavigationActions
+import tech.debuggingmadejoyful.anddaaven.data.preferences.PreferencesRepository
 import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaRepository
 import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 import tech.debuggingmadejoyful.anddaaven.ui.theme.AndDaavenTheme
@@ -25,6 +30,7 @@ import tech.debuggingmadejoyful.anddaaven.ui.theme.AndDaavenTheme
 @Composable
 fun  AndDaavenApp (
     tefillaRepository: TefillaRepository,
+    preferencesRepository: PreferencesRepository,
     widthSizeClass: WindowWidthSizeClass,
 ) {
     AndDaavenTheme {
@@ -61,10 +67,16 @@ fun  AndDaavenApp (
                     isExpandedScreen = isExpandedScreen,
                     navController = navController,
                     openDrawer = { coroutineScope.launch { sizeAwareDrawerState.open() } },
+                    saveTextSize = { saveTextSize(coroutineScope, preferencesRepository, it) },
+                    textSize = preferencesRepository.currentTextSize.collectAsState(16f).value
                 )
             }
         }
     }
+}
+
+private fun saveTextSize(coroutineScope: CoroutineScope, preferencesRepository: PreferencesRepository, textSize: Float) {
+    coroutineScope.launch { preferencesRepository.saveTextSize(textSize)  }
 }
 
 /**

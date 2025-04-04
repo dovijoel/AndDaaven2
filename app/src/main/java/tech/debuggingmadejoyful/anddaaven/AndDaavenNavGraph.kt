@@ -1,6 +1,7 @@
 package tech.debuggingmadejoyful.anddaaven
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -24,6 +25,8 @@ fun AndDaavenNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     openDrawer: () -> Unit = {},
+    saveTextSize: (Float) -> Unit,
+    textSize: Float,
     startDestination: String = AndDaavenDestinations.HOME_ROUTE,
 ) {
     NavHost(
@@ -40,7 +43,9 @@ fun AndDaavenNavGraph(
                 )
             TefillaRoute(
                 tefillaViewModel,
-                openDrawer
+                openDrawer,
+                saveTextSize,
+                textSize
             )
         }
         composable(AndDaavenDestinations.HOME_ROUTE) {

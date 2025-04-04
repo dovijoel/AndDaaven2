@@ -28,6 +28,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,15 +48,20 @@ import tech.debuggingmadejoyful.anddaaven.R
 @Composable
 fun TefillaScreen(
     uiState: TefillaUiState,
-    openDrawer: () -> Unit
+    openDrawer: () -> Unit,
+    saveTextSize: (Float) -> Unit,
+    textSize: Float,
 ) {
     val topAppBarState = rememberTopAppBarState()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
-    var scale by remember { mutableFloatStateOf(18f) }
+    var zoom by remember{ mutableFloatStateOf(textSize) }
     val state = rememberTransformableState { zoomChange, _, _ ->
-        scale *= zoomChange
+        zoom *= zoomChange
+        saveTextSize(zoom)
     }
+
+
     Scaffold(
         topBar = {
             if (uiState.tefilla != null && uiState.tefilla.tefillaName.isNotEmpty())
@@ -89,7 +95,7 @@ fun TefillaScreen(
                         TefillaComponent(
                             tefilla = tefilla,
                             listState,
-                            scale
+                            zoom
                         )
                     }
                 }

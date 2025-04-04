@@ -35,11 +35,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val tefillaRepository = (application as AndDaavenApplication).tefillaRepository
+        val preferencesRepository = (application as AndDaavenApplication).preferencesRepository
 
         setContent {
             val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
 
-            AndDaavenApp(tefillaRepository, widthSizeClass)
+            AndDaavenApp(tefillaRepository, preferencesRepository, widthSizeClass)
         }
     }
 }
