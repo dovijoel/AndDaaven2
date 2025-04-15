@@ -5,7 +5,7 @@ import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 
 object AndDaavenDestinations {
     const val HOME_ROUTE = "home"
-    const val TEFILLA_ROUTE = "tefilla"
+    const val PREFERENCES_ROUTE = "preferences"
 }
 
 class AndDaavenNavigationActions(navController: NavController) {
@@ -14,5 +14,8 @@ class AndDaavenNavigationActions(navController: NavController) {
     }
     val navigateToTefilla: (TefillaType) -> Unit = {
         navController.navigate(route = TefillaUri(it))
+    }
+    val navigateToPreferences: () -> Unit = {
+        navController.navigate(AndDaavenDestinations.PREFERENCES_ROUTE)
     }
 }

@@ -38,9 +38,7 @@ class MainActivity : ComponentActivity() {
         val preferencesRepository = (application as AndDaavenApplication).preferencesRepository
 
         setContent {
-            val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
-
-            AndDaavenApp(tefillaRepository, preferencesRepository, widthSizeClass)
+            AndDaavenApp(tefillaRepository, preferencesRepository)
         }
     }
 }

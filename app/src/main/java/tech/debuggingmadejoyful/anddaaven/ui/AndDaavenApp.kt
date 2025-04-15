@@ -1,5 +1,6 @@
 package tech.debuggingmadejoyful.anddaaven.ui
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -10,6 +11,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -30,10 +32,16 @@ import tech.debuggingmadejoyful.anddaaven.ui.theme.AndDaavenTheme
 @Composable
 fun  AndDaavenApp (
     tefillaRepository: TefillaRepository,
-    preferencesRepository: PreferencesRepository,
-    widthSizeClass: WindowWidthSizeClass,
+    preferencesRepository: PreferencesRepository
 ) {
-    AndDaavenTheme {
+    val darkMode = preferencesRepository.currentTheme.collectAsState("AUTO")
+    val systemDarkMode = isSystemInDarkTheme()
+    val isDarkMode by remember { mutableStateOf(
+        if (darkMode.value == "AUTO") systemDarkMode
+        else darkMode.value == "DARK"
+    )
+    }
+    AndDaavenTheme(darkTheme = isDarkMode) {
         val navController = rememberNavController()
         val navigationActions = remember(navController) {
             AndDaavenNavigationActions(navController)
@@ -64,7 +72,7 @@ fun  AndDaavenApp (
             Row {
                 AndDaavenNavGraph(
                     tefillaRepository = tefillaRepository,
-                    isExpandedScreen = isExpandedScreen,
+                    preferencesRepository = preferencesRepository,
                     navController = navController,
                     openDrawer = { coroutineScope.launch { sizeAwareDrawerState.open() } },
                     saveTextSize = { saveTextSize(coroutineScope, preferencesRepository, it) },

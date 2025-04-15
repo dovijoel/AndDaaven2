@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import tech.debuggingmadejoyful.anddaaven.AndDaavenDestinations
 import tech.debuggingmadejoyful.anddaaven.TefillaUri
 import tech.debuggingmadejoyful.anddaaven.data.tefilla.TefillaType
 
@@ -88,6 +89,10 @@ class HomeViewModel(
 
             navController.navigate(route = TefillaUri(tefillaType))
 
+    }
+
+    fun navigateToSettings() {
+        navController.navigate(AndDaavenDestinations.PREFERENCES_ROUTE)
     }
 
     companion object {
